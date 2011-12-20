@@ -4,6 +4,32 @@
 	<title>Cartalyst / Sentry</title>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
 	<link href='css/styles.css' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		body {
+			font-size: 14px;
+		}
+		h1 span {
+			font-size: 24px;
+		}
+
+		table {
+			border-collapse: collapse;
+		}
+		table th, table td {
+			padding: 5px;
+		}
+		table table td, table.config td {
+			border: 1px solid #aaa;
+		}
+		.method {
+			border-bottom: 1px solid #aaa;
+			padding-bottom: 3px;
+		}
+
+		pre code {
+			font-size: 15px;
+		}
+	</style>
 </head>
 <body>
 	<div id="wrapper">
@@ -20,11 +46,13 @@ It also provides additional features such as user groups and additional security
 <h2>Download</h2>
 <p>
 Download Sentry into your FuelPHP's packages directory. You can download the latest version of
-Sentry via zip <a href="https://github.com/cartalyst/sentry/zipball/develop">here</a> or pull directly
+Sentry via zip <a href="https://github.com/cartalyst/sentry/zipball/v1.0-rc1">here</a> or pull directly
 from the repository with the following command within the 'fuel/packages/' directory.
 </p>
-<pre><code class="no-highlight">$ git clone -b master git@github.com:cartalyst/sentry.git sentry
-</code></pre>
+<pre>
+<code class="language-php">$ git clone -b master git@github.com:cartalyst/sentry.git sentry
+</code>
+</pre>
 
 <h2>Installation</h2>
 <p>
@@ -38,15 +66,17 @@ Default table names are: <strong>users</strong>, <strong>users_metadata</strong>
 in sentry/migrations if you can not install via oil for some reason. If you wish to change the default
 table names, you may adjust them in the configuration file.
 </p>
-<pre><code class="no-highlight">$ php oil r migrate --packages=sentry
-</code></pre>
+<pre>
+<code class="language-php">$ php oil r migrate --packages=sentry
+</code>
+</pre>
 
 <h2>Configuration</h2>
 <p>
 Sentry has a few configuration options you may wish to adjust besides just the table names mentioned above.
 </p>
 
-<h4>Login Column</h4>
+<h3>Login Column</h3>
 <p>
 Sentry allows you to pick your login column to either be <strong>username</strong> or <strong>email</strong>.
 This option is easy to adjust in the configuration.
@@ -68,7 +98,7 @@ This option is easy to adjust in the configuration.
 	</tr>
 </table>
 
-<h4>Remember Me</h4>
+<h3>Remember Me</h3>
 <p>
 Remember me sets a cookie to keep the user logged in for a designated length of time.
 This feature contains the following options.
@@ -94,7 +124,7 @@ This feature contains the following options.
 	</tr>
 </table>
 
-<h4>Suspension / Limit Attempts</h4>
+<h3>Suspension / Limit Attempts</h3>
 <p>
 Sentry has included an additional security feature to limit the amount of attempts a user/ip combo can make within a certain timeframe.
 </p>
@@ -136,7 +166,7 @@ The user method returns a Sentry_User object.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -144,7 +174,7 @@ The user method returns a Sentry_User object.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$id</kbd></td>
+					<td>$id</td>
 					<td>int|string</td>
 					<td>null</td>
 					<td>
@@ -154,7 +184,7 @@ The user method returns a Sentry_User object.
 					</td>
 				</tr>
 				<tr>
-					<td><kbd>$recache</kbd></td>
+					<td>$recache</td>
 					<td>bool</td>
 					<td>false</td>
 					<td>Recache the selected user object.</td>
@@ -171,8 +201,10 @@ The user method returns a Sentry_User object.
 		<td>SentryAuthException</td>
 	</tr>
 </table>
-<h5>Examples:</h5>
-<pre><code class="language-php">// select a user by id
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// select a user by id
 $user = Sentry::user(12);
 
 // select a user by login column
@@ -180,7 +212,8 @@ $user = Sentry::user('john.doe@domain.com');
 
 // get the current logged in user or an empty user
 $user = Sentry::user();
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">group($id = null)</h4>
 <p>
@@ -195,7 +228,7 @@ The login method logs the user in.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -203,19 +236,19 @@ The login method logs the user in.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$login_column_value</kbd></td>
+					<td>$login_column_value</td>
 					<td>string</td>
 					<td></td>
 					<td>The users login ( email or username ).</td>
 				</tr>
 				<tr>
-					<td><kbd>$password</kbd></td>
+					<td>$password</td>
 					<td>string</td>
 					<td></td>
 					<td>The users password</td>
 				</tr>
 				<tr>
-					<td><kbd>$remember</kbd></td>
+					<td>$remember</td>
 					<td>bool</td>
 					<td></td>
 					<td>Whether the remember me cookie should be created or not.</td>
@@ -232,8 +265,10 @@ The login method logs the user in.
 		<td>SentryAuthException</td>
 	</tr>
 </table>
-<h5>Examples:</h5>
-<pre><code class="language-php">// try to log a user in
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// try to log a user in
 try
 {
 	// log the user in
@@ -255,7 +290,8 @@ catch (SentryAuthException $e)
 	// store/set and display caught exceptions such as a suspended user with limit attempts feature.
 	$errors = $e->getMessage();
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">logout()</h4>
 <p>
@@ -267,10 +303,13 @@ The logout method logs the user out and destroys all Sentry sessions/cookies for
 		<td>void</td>
 	</tr>
 </table>
-<h5>Examples:</h5>
-<pre><code class="language-php">// log the user out
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// log the user out
 Sentry::logout();
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">check()</h4>
 <p>
@@ -282,8 +321,10 @@ The check methods returns a bool of whether the user is logged in or not
 		<td>bool</td>
 	</tr>
 </table>
-<h5>Examples:</h5>
-<pre><code class="language-php">// basic login check example
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// basic login check example
 if (Sentry::check())
 {
 	// the user is logged in
@@ -299,7 +340,8 @@ if ( ! Sentry::check())
 	// redirect to login
 }
 
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">activate_user($login_column_value, $code, $encoded = true)</h4>
 <p>
@@ -309,7 +351,7 @@ The activate_user method activates a non-active user
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -317,19 +359,19 @@ The activate_user method activates a non-active user
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$login_column_value</kbd></td>
+					<td>$login_column_value</td>
 					<td>string</td>
 					<td></td>
 					<td>The users login ( email or username ).</td>
 				</tr>
 				<tr>
-					<td><kbd>$code</kbd></td>
+					<td>$code</td>
 					<td>string</td>
 					<td></td>
 					<td>The users activation hash.</td>
 				</tr>
 				<tr>
-					<td><kbd>$decode</kbd></td>
+					<td>$decode</td>
 					<td>bool</td>
 					<td>true</td>
 					<td>If the login value needs to be decoded.</td>
@@ -346,8 +388,10 @@ The activate_user method activates a non-active user
 		<td>SentryAuthException</td>
 	</tr>
 </table>
-<h5>Examples:</h5>
-<pre><code class="language-php">// try to log a user in
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// try to log a user in
 try
 {
 	// log the user in
@@ -371,7 +415,8 @@ catch (SentryAuthException $e)
 	// store/set and display caught exceptions such as a suspended user with limit attempts feature.
 	$errors = $e->getMessage();
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">reset_password($login_column_value, $password)</h4>
 <p>
@@ -382,7 +427,7 @@ temporary fields in the database.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -390,13 +435,13 @@ temporary fields in the database.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$login_column_value</kbd></td>
+					<td>$login_column_value</td>
 					<td>string</td>
 					<td></td>
 					<td>The users login.</td>
 				</tr>
 				<tr>
-					<td><kbd>$password</kbd></td>
+					<td>$password</td>
 					<td>string</td>
 					<td></td>
 					<td>A new password that the user wants to use.</td>
@@ -418,8 +463,10 @@ temporary fields in the database.
 <strong>Notes:</strong> The new password will not come into effect until confirmed. Also, if a user logs
 into the account before the password is confirmed, the entire reset password process will be nullified.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// reset the password
 	$reset = Sentry::reset_password('john.doe@domain.com', 'newpassword');
@@ -443,7 +490,8 @@ catch (SentryAuthException $e)
 	// store/set and display caught exceptions such as a user not existing or user is disabled
 	$errors = $e->getMessage();
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">reset_password_confirm($login_column_value, $code, $decode = true)</h4>
 <p>
@@ -454,7 +502,7 @@ If it is confirmed, the passwords are updated in the database appropriately.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -462,19 +510,19 @@ If it is confirmed, the passwords are updated in the database appropriately.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$login_column_value</kbd></td>
+					<td>$login_column_value</td>
 					<td>string</td>
 					<td></td>
 					<td>The users login.</td>
 				</tr>
 				<tr>
-					<td><kbd>$code</kbd></td>
+					<td>$code</td>
 					<td>string</td>
 					<td></td>
 					<td>The password reset hash.</td>
 				</tr>
 				<tr>
-					<td><kbd>$decode</kbd></td>
+					<td>$decode</td>
 					<td>bool</td>
 					<td>true</td>
 					<td>If the login value needs to be decoded.</td>
@@ -495,8 +543,10 @@ If it is confirmed, the passwords are updated in the database appropriately.
 <p>
 <strong>Notes:</strong> If the user logs in to their account before confirming the reset, the reset process will be nullified.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// confirm password reset
 	$confirm_reset = Sentry::reset_password_confirm('VGhpcyBpcyBhbiBlbmNvZGVkIHN0cmluZw==', '93kavFY63S8jtala93a76fQ...');
@@ -519,7 +569,8 @@ catch (SentryAuthException $e)
 	// store/set and display caught exceptions such as a user not existing or user is disabled
 	$errors = $e->getMessage();
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">user_exists($login_column_value)</h4>
 <p>
@@ -529,7 +580,7 @@ The user_exists methods returns a bool of whether the user exists or not.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -537,7 +588,7 @@ The user_exists methods returns a bool of whether the user exists or not.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$login_column_value</kbd></td>
+					<td>$login_column_value</td>
 					<td>int|string</td>
 					<td></td>
 					<td>The user_id or users login.</td>
@@ -555,8 +606,10 @@ The user_exists methods returns a bool of whether the user exists or not.
 <strong>Notes:</strong> This is just a helper function. You do not need to add this check in on registration
 or user creation.  These methods already check to make sure the user is unique by calling user_exists.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">if (Sentry::user_exists('john.doe@domain.com'))
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+if (Sentry::user_exists('john.doe@domain.com'))
 {
 	// the user exists
 }
@@ -564,7 +617,8 @@ else
 {
 	// the user does not exist
 }
-</code></pre>
+</code>
+</pre>
 
 <h3>User Methods</h3>
 
@@ -576,7 +630,7 @@ The create method creates a user
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -584,7 +638,7 @@ The create method creates a user
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$user</kbd></td>
+					<td>$user</td>
 					<td>array</td>
 					<td></td>
 					<td>
@@ -593,7 +647,7 @@ The create method creates a user
 					</td>
 				</tr>
 				<tr>
-					<td><kbd>$activation</kbd></td>
+					<td>$activation</td>
 					<td>bool</td>
 					<td>false</td>
 					<td>If set to true, the user is required to activate their account before they can log in.</td>
@@ -615,8 +669,10 @@ The create method creates a user
 <strong>Notes:</strong> The create method checks to make sure the login and emails are unique. Create is typically
 used for admin user creation.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// create the user - no activation required
 	$user_id = Sentry::user()->create($vars, false);
@@ -634,7 +690,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user exists or bad fields
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">register(array $user)</h4>
 <p>
@@ -644,7 +701,7 @@ The register method creates a user. It is just an alias for the create method wi
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -652,7 +709,7 @@ The register method creates a user. It is just an alias for the create method wi
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$user</kbd></td>
+					<td>$user</td>
 					<td>array</td>
 					<td></td>
 					<td>
@@ -677,8 +734,10 @@ The register method creates a user. It is just an alias for the create method wi
 <strong>Notes:</strong> The register method checks to make sure the login and emails are unique.  Register is
 typically used for the user registration process unless you do not want activation.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// create the user
 	$user_id = Sentry::user()->register($vars);
@@ -703,7 +762,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user exists or bad fields
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">update(array $fields, $hash_password = true)</h4>
 <p>
@@ -713,7 +773,7 @@ The update method can be used to update any field in the 'users' or 'users_metad
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -721,7 +781,7 @@ The update method can be used to update any field in the 'users' or 'users_metad
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$fields</kbd></td>
+					<td>$fields</td>
 					<td>array</td>
 					<td></td>
 					<td>
@@ -730,7 +790,7 @@ The update method can be used to update any field in the 'users' or 'users_metad
 					</td>
 				</tr>
 				<tr>
-					<td><kbd>$hash_password</kbd></td>
+					<td>$hash_password</td>
 					<td>bool</td>
 					<td>true</td>
 					<td>If set to true, all password fields will be hashed.</td>
@@ -752,8 +812,10 @@ The update method can be used to update any field in the 'users' or 'users_metad
 <strong>Notes:</strong> The register method checks to make sure the login and emails are unique.  Register is
 typically used for the user registration process unless you do not want activation.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -778,7 +840,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user not existing or bad fields
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">delete()</h4>
 <p>
@@ -795,8 +858,10 @@ The delete method deletes a user.
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -815,7 +880,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user not existing
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">get($field = null)</h4>
 <p>
@@ -825,7 +891,7 @@ The get method returns requested fields.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -833,7 +899,7 @@ The get method returns requested fields.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$field</kbd></td>
+					<td>$field</td>
 					<td>string|array</td>
 					<td></td>
 					<td>
@@ -857,8 +923,10 @@ The get method returns requested fields.
 <p>
 <strong>Notes:</strong> FuelPHP's array '.' notation works with retrieving data from arrays.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -874,7 +942,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user not existing or bad fields
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">change_password($password, $old_password)</h4>
 <p>
@@ -884,7 +953,7 @@ The change_password method updates the users password.  Their old password is re
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -892,13 +961,13 @@ The change_password method updates the users password.  Their old password is re
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$password</kbd></td>
+					<td>$password</td>
 					<td>string</td>
 					<td></td>
 					<td>The users new password</td>
 				</tr>
 				<tr>
-					<td><kbd>$old_password</kbd></td>
+					<td>$old_password</td>
 					<td>string</td>
 					<td></td>
 					<td>The users old password</td>
@@ -919,8 +988,10 @@ The change_password method updates the users password.  Their old password is re
 <p>
 <strong>Notes:</strong> FuelPHP's array '.' notation works with retrieving data from arrays.
 </p>
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -938,7 +1009,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as incorrect old password
 }
-</code></pre>
+</code>
+</pre>
 
 <h3>Group Methods</h3>
 
@@ -953,8 +1025,10 @@ Returns an array of groups the user is part of.
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -964,7 +1038,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user doesn't exist
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">add_to_group($id)</h4>
 <p>
@@ -974,7 +1049,7 @@ Returns an array of groups the user is part of.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -982,7 +1057,7 @@ Returns an array of groups the user is part of.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$id</kbd></td>
+					<td>$id</td>
 					<td>int|string</td>
 					<td></td>
 					<td>The groups id or name</td>
@@ -1000,8 +1075,10 @@ Returns an array of groups the user is part of.
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -1016,7 +1093,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user already in group
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">add_to_group($id)</h4>
 <p>
@@ -1026,7 +1104,7 @@ Adds the user to a group.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -1034,7 +1112,7 @@ Adds the user to a group.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$id</kbd></td>
+					<td>$id</td>
 					<td>int|string</td>
 					<td></td>
 					<td>The groups id or name</td>
@@ -1052,8 +1130,10 @@ Adds the user to a group.
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -1068,7 +1148,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user already in group
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">remove_from_group($id)</h4>
 <p>
@@ -1078,7 +1159,7 @@ Removes a user from a group.
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -1086,7 +1167,7 @@ Removes a user from a group.
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$id</kbd></td>
+					<td>$id</td>
 					<td>int|string</td>
 					<td></td>
 					<td>The groups id or name</td>
@@ -1104,8 +1185,10 @@ Removes a user from a group.
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">try
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+try
 {
 	// update the user
 	$user = Sentry::user(25);
@@ -1120,7 +1203,8 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user already not in group.
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">in_group($name)</h4>
 <p>
@@ -1130,7 +1214,7 @@ Checks to see if the user is in a group
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -1138,7 +1222,7 @@ Checks to see if the user is in a group
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$name</kbd></td>
+					<td>$name</td>
 					<td>int|string</td>
 					<td></td>
 					<td>The groups id or name</td>
@@ -1152,8 +1236,10 @@ Checks to see if the user is in a group
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">// check to see if the current user is in the editors(id:2) group
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// check to see if the current user is in the editors(id:2) group
 if (Sentry::user()->in_group(2)) // or in_group('editors');
 {
 	// user is in the group
@@ -1162,7 +1248,8 @@ else
 {
 	// user is not in the group
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">is_admin()</h4>
 <p>
@@ -1175,8 +1262,10 @@ Checks to see if the user is an admin
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">// check to see if the current user is an admin
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// check to see if the current user is an admin
 if (Sentry::user()->is_admin())
 {
 	// user is an admin
@@ -1185,7 +1274,8 @@ else
 {
 	// user is not an admin
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">has_level($level)</h4>
 <p>
@@ -1195,7 +1285,7 @@ Checks to see if the user contains a certain level
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -1203,7 +1293,7 @@ Checks to see if the user contains a certain level
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$level</kbd></td>
+					<td>$level</td>
 					<td>int</td>
 					<td></td>
 					<td>The level number.</td>
@@ -1217,8 +1307,10 @@ Checks to see if the user contains a certain level
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">// check to see if the current user has a user level equal to 10
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// check to see if the current user has a user level equal to 10
 if (Sentry::user()->has_level(10))
 {
 	// user contains a level equal to 10
@@ -1227,7 +1319,8 @@ else
 {
 	// user does not contain a level equal to 10
 }
-</code></pre>
+</code>
+</pre>
 
 <h4 class="method">atleast_level($level)</h4>
 <p>
@@ -1237,7 +1330,7 @@ Checks to see if the user contains a certain level
 	<tr>
 		<th>Parameters</th>
 		<td>
-			<table class="parameters">
+			<table>
 				<tr>
 					<th>Param</th>
 					<th>Type</th>
@@ -1245,7 +1338,7 @@ Checks to see if the user contains a certain level
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td><kbd>$level</kbd></td>
+					<td>$level</td>
 					<td>int</td>
 					<td></td>
 					<td>The level number.</td>
@@ -1259,8 +1352,10 @@ Checks to see if the user contains a certain level
 	</tr>
 </table>
 <br />
-<h5>Examples:</h5>
-<pre><code class="language-php">// check to see if the current user has a user level of 10 or higher
+<h4>Examples:</h4>
+<pre>
+<code class="language-php">
+// check to see if the current user has a user level of 10 or higher
 if (Sentry::user()->atleast_level(10))
 {
 	// user has a level of 10 or higher
@@ -1269,7 +1364,8 @@ else
 {
 	// user does not have a level of at least 10
 }
-</code></pre>
+</code>
+</pre>
 
 		<div id="footer">
 			<p>&copy; 2011 Cartalyst LLC &middot; Released under the <a href="license.html">MIT License</a></p>
