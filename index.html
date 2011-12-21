@@ -196,11 +196,6 @@ $user = Sentry::user('john.doe@domain.com');
 $user = Sentry::user();
 </code></pre>
 
-<h4 class="method">group($id = null)</h4>
-<p>
-Document Later - need to test
-</p>
-
 <h4 class="method">login($login_column_value, $password, $remember = false)</h4>
 <p>
 The login method logs the user in.
@@ -535,51 +530,6 @@ catch (SentryAuthException $e)
 }
 </code></pre>
 
-<h4 class="method">user_exists($login_column_value)</h4>
-<p>
-The user_exists methods returns a bool of whether the user exists or not.
-</p>
-<table>
-	<tr>
-		<th>Parameters</th>
-		<td>
-			<table class="parameters">
-				<tr>
-					<th>Param</th>
-					<th>Type</th>
-					<th>Default</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td><kbd>$login_column_value</kbd></td>
-					<td>int|string</td>
-					<td></td>
-					<td>The user_id or users login.</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<th>Returns</th>
-		<td>Bool</td>
-	</tr>
-</table>
-<br />
-<p>
-<strong>Notes:</strong> This is just a helper function. You do not need to add this check in on registration
-or user creation.  These methods already check to make sure the user is unique by calling user_exists.
-</p>
-<h5>Examples:</h5>
-<pre><code class="language-php">if (Sentry::user_exists('john.doe@domain.com'))
-{
-	// the user exists
-}
-else
-{
-	// the user does not exist
-}
-</code></pre>
-
 <h3>User Methods</h3>
 
 <h4 class="method">create(array $user, $activation = false)</h4>
@@ -831,6 +781,51 @@ catch (SentryUserException $e)
 }
 </code></pre>
 
+<h4 class="method">user_exists($login_column_value)</h4>
+<p>
+The user_exists methods returns a bool of whether the user exists or not.
+</p>
+<table>
+	<tr>
+		<th>Parameters</th>
+		<td>
+			<table class="parameters">
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><kbd>$login_column_value</kbd></td>
+					<td>int|string</td>
+					<td></td>
+					<td>The user_id or users login.</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>Returns</th>
+		<td>Bool</td>
+	</tr>
+</table>
+<br />
+<p>
+<strong>Notes:</strong> This is just a helper function. You do not need to add this check in on registration
+or user creation.  These methods already check to make sure the user is unique by calling user_exists.
+</p>
+<h5>Examples:</h5>
+<pre><code class="language-php">if (Sentry::user_exists('john.doe@domain.com'))
+{
+	// the user exists
+}
+else
+{
+	// the user does not exist
+}
+</code></pre>
+
 <h4 class="method">get($field = null)</h4>
 <p>
 The get method returns requested fields.
@@ -954,7 +949,7 @@ catch (SentryUserException $e)
 }
 </code></pre>
 
-<h3>Group Methods</h3>
+<h3>User Group Methods</h3>
 
 <h4 class="method">groups()</h4>
 <p>
@@ -977,6 +972,52 @@ Returns an array of groups the user is part of.
 catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user doesn't exist
+}
+</code></pre>
+
+<h4 class="method">group_exists($name)</h4>
+<p>
+The group_exists methods returns a bool of whether the group exists or not.
+</p>
+<table>
+	<tr>
+		<th>Parameters</th>
+		<td>
+			<table class="parameters">
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><kbd>$name</kbd></td>
+					<td>string</td>
+					<td></td>
+					<td>The groups name.</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>Returns</th>
+		<td>Bool</td>
+	</tr>
+</table>
+<br />
+<p>
+<strong>Notes:</strong> This is just a helper function. You do not need to add this check in on group creation
+creation.  Create already checks if the name already exists or not.
+</p>
+<h5>Examples:</h5>
+<pre><code class="language-php">// check if group exists
+if (Sentry::group_exists('mygroup'))
+{
+	// the group exists
+}
+else
+{
+	// the group does not exist
 }
 </code></pre>
 
@@ -1284,6 +1325,201 @@ else
 	// user does not have a level of at least 10
 }
 </code></pre>
+
+<h3>Group Methods</h3>
+
+<h4 class="method">group($id = null)</h4>
+<p>
+The group method grabs and sets all group information. It does not return anything.
+</p>
+<table>
+	<tr>
+		<th>Parameters</th>
+		<td>
+			<table class="parameters">
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><kbd>$id</kbd></td>
+					<td>int|string</td>
+					<td>null</td>
+					<td>The group id or name.</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>Returns</th>
+		<td>Sentry_Group object</td>
+	</tr>
+	<tr>
+		<th>Throws</th>
+		<td>SentryGroupException</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// set the group
+try
+{
+	$group = Sentry::group(25);
+	// or
+	$group = Sentry::group('somegroup');
+	//or
+	$group = Sentry::group();
+}
+catch (SentryGroupException $e)
+{
+	$errors = $e->getMessage();
+}
+</code></pre>
+
+<h4 class="method">create($group)</h4>
+<p>
+The create method creates a new group.
+</p>
+<table>
+	<tr>
+		<th>Parameters</th>
+		<td>
+			<table class="parameters">
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><kbd>$group</kbd></td>
+					<td>string</td>
+					<td></td>
+					<td>The group name.</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>Returns</th>
+		<td>Group Id or false</td>
+	</tr>
+	<tr>
+		<th>Throws</th>
+		<td>SentryGroupException</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// create a group
+try
+{
+	Sentry::group()->create('mynewgroup');
+}
+catch (SentryGroupException $e)
+{
+	$errors = $e->getMessage();
+}
+</code></pre>
+
+<h4 class="method">get($field = null)</h4>
+<p>
+The get method gets a given field (or array of fields).
+</p>
+<table>
+	<tr>
+		<th>Parameters</th>
+		<td>
+			<table class="parameters">
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><kbd>$field</kbd></td>
+					<td>string</td>
+					<td></td>
+					<td>The name of field.</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>Returns</th>
+		<td>String value or Array of values</td>
+	</tr>
+	<tr>
+		<th>Throws</th>
+		<td>SentryGroupException</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// get group information
+try
+{
+	$group_level = Sentry::group(2)->get('level');
+	//or
+	$group_level = Sentry::group('mygroup')->get('level');
+	//or
+	$group_info = Sentry::group(2)->get(array('name', 'level'));
+}
+catch (SentryGroupException $e)
+{
+	$errors = $e->getMessage();
+}
+</code></pre>
+
+<h4 class="method">users()</h4>
+<p>
+The users method returns all the users in the group.
+</p>
+<table>
+	<tr>
+		<th>Returns</th>
+		<td>Sentry_Group object</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// get group information
+try
+{
+	$users = Sentry::group(2)->users();
+}
+catch (SentryGroupException $e)
+{
+	$errors = $e->getMessage();
+}
+</code></pre>
+
+<h4 class="method">all()</h4>
+<p>
+The all method returns all groups
+</p>
+<table>
+	<tr>
+		<th>Returns</th>
+		<td>Sentry_Group object</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// get group information
+try
+{
+	$groups = Sentry::group()->all();
+}
+catch (SentryGroupException $e)
+{
+	$errors = $e->getMessage();
+}
+</code></pre>
+
 
 		<div id="footer">
 			<p>&copy; 2011 Cartalyst LLC &middot; Released under the <a href="license.html">MIT License</a></p>
