@@ -380,3 +380,7 @@ th {background:#f7f7f7; text-align:left; padding:4px;font-weight:bold;border:1px
 tr {}
 td {padding:4px;border:1px solid #ccc;}
 
+ul.features {
+	margin-left: 35px;
+	list-style: disc;
+}
