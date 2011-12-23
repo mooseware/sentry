@@ -286,3 +286,8 @@ pre .number {
 pre .tex .formula {
   opacity: 0.7;
 }
+
+ul.features {
+	margin-left: 35px;
+	list-style: disc;
+}
