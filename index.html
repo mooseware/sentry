@@ -1520,6 +1520,183 @@ catch (SentryGroupException $e)
 }
 </code></pre>
 
+<h3>Limit Attempts / Suspension Methods</h3>
+
+<h4 class="method">attempts($login_id = null, $ip_address = null)</h4>
+<p>
+The attempts method sets and returns a Sentry_Attempts object.
+</p>
+<table>
+	<tr>
+		<th>Parameters</th>
+		<td>
+			<table class="parameters">
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><kbd>$login_id</kbd></td>
+					<td>string</td>
+					<td>null</td>
+					<td>The users login.</td>
+				</tr>
+				<tr>
+					<td><kbd>$ip_address</kbd></td>
+					<td>string</td>
+					<td>null</td>
+					<td>The users ip address</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>Returns</th>
+		<td>Sentry_Object</td>
+	</tr>
+	<tr>
+		<th>Throws</th>
+		<td>SentryAttemptsException</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// get the Sentry_Attempts object
+// sets attempts data for all users
+$attempts = Sentry::attempts();
+
+// sets attempts data for a user
+$attempts = Sentry::attempts('john.doe@domain.com');
+
+// set attempts data for an ip address
+$attempts = Sentry::attempts(null, '123.432.2.1');
+
+// set attempts for a single user/ip combo
+$attempts = Sentry::attempts('john.doe@domain.com', '123.432.2.1');
+</code></pre>
+<p>
+<strong>Notes:</strong> The exceptions with this method are only thrown if there are bad config settings. You
+should only have to worry about them during the inital setup of Sentry.
+</p>
+
+<h4 class="method">get_limit()</h4>
+<p>
+The get_limit method returns the number of attempts allowed before a user is suspended.
+</p>
+<table>
+	<tr>
+		<th>Returns</th>
+		<td>Integer</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// get attempt limit
+$attempts = Sentry::attempts()->get_limit(); // returns int
+</code></pre>
+<p>
+<strong>Notes:</strong> Use an existing object if one is available to prevent extra queries. The result will
+be the same on all objects as it is just pulling from the config.
+</p>
+
+<h4 class="method">get()</h4>
+<p>
+The get method returns the number of failed attempts a login / ip combo has tried.
+</p>
+<table>
+	<tr>
+		<th>Returns</th>
+		<td>Integer|Array - number of failed attempts, array of associated login/ip attempts</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// get attempts
+
+// for all cases
+$attempts = Sentry::attempts()->get(); // returns array
+
+// for a single case
+$attempts = Sentry::attempts('john.doe@domain.com', '123.432.2.1')->get(); // returns int
+
+// for all attempts associated to a username or ip
+$attempts = Sentry::attempts('john.doe@domain.com')->get(); // returns array
+$attempts = Sentry::attempts(null, '123.432.2.1')->get(); // returns array
+</code></pre>
+
+<h4 class="method">add()</h4>
+<p>
+The add method adds an attempt to a certain login/ip combo.
+</p>
+<table>
+	<tr>
+		<th>Throws</th>
+		<td>SentryAttemptsException</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// add an attempt
+try
+{
+	Sentry::attempts('john.doe@domain.com', '123.432.2.1')->add(); // works fine
+
+	Sentry::attempts()->add(); // this or any other combo will throw an exception - login/ip required
+}
+catch (SentryAttemptsException $e)
+{
+	$error = $e->getMessage();
+}
+</code></pre>
+
+<h4 class="method">clear()</h4>
+<p>
+The clear method removes attempts and suspensions for all, or the selected, users
+</p>
+<h5>Examples:</h5>
+<pre><code class="language-php">// clear attempts for all users
+Sentry::attempts()->clear();
+
+// clear all attempts for login id
+Sentry::attempts('john.doe@domain.com')->clear();
+
+// clear all attempts for an ip
+Sentry::attempts(null, '123.432.21.1')->clear();
+
+// clear all attempts for a login/ip combo
+Sentry::attempts('john.doe@domain.com', '123.432.2.1')->clear();
+</code></pre>
+<p>
+<strong>Notes:</strong> If you have multiple Sentry_Objects, the attempts won't be updated when cleared
+unless you refresh that instance.
+</p>
+
+<h4 class="method">suspend()</h4>
+<p>
+The suspend method suspends a login/ip combo for a set amount of time.
+</p>
+<table>
+	<tr>
+		<th>Throws</th>
+		<td>SentryAttemptsException</td>
+	</tr>
+</table>
+<br />
+<h5>Examples:</h5>
+<pre><code class="language-php">// suspend a user
+try
+{
+	Sentry::attempts('john.doe@domain.com', '123.432.2.1')->suspend(); // works fine
+
+	Sentry::attempts()->suspend(); // this or any other combo will throw an exception - login/ip required
+}
+catch (SentryAttemptsException $e)
+{
+	$error = $e->getMessage();
+}
+</code></pre>
 
 		<div id="footer">
 			<p>&copy; 2011 Cartalyst LLC &middot; Released under the <a href="license.html">MIT License</a></p>
