@@ -72,7 +72,7 @@
 	h2 { font-size: 35px; line-height: 40px; margin-bottom: 10px; }
 	h3 { font-size: 28px; line-height: 34px; margin-bottom: 8px; }
 	h4 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
-	h5 { font-size: 17px; line-height: 24px; }
+	h5 { font-size: 17px; line-height: 24px; margin:8px 0;}
 	h6 { font-size: 14px; line-height: 21px; }
 	.subheader { color: #777; }
 
@@ -376,7 +376,7 @@ pre ul {
 table {border:1px solid #ccc;width:100%;}
 th {background:#f7f7f7; text-align:left; padding:4px;font-weight:bold;border:1px solid #ccc;}
 tr {}
-td {padding:4px;border:1px solid #ccc;}
+td {padding:8px 4px;border:1px solid #ccc;}
 
 ul.features {
 	margin-left: 35px;

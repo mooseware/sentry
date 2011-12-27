@@ -38,10 +38,8 @@
 
 <div class="container">
 				<div class="three columns sidebar">
+					<a href="#top"><img class="brand" src="images/brand-sentry.png" alt="sentry" /></a>
 					<nav>
-						<a href="#top"><img class="brand" src="images/brand-sentry.png" alt="sentry" /></a>
-
-
 						<ul id="menu">
 							<li><a href="#features">Features</a></li>
 							<li><a href="#download">Download</a></li>
@@ -73,7 +71,7 @@
 									<li><a href="#user-register">register()</a></li>
 									<li><a href="#user-update">update()</a></li>
 									<li><a href="#user-delete">delete()</a></li>
-									<li><a href="#user-userexists">userexists()</a></li>
+									<li><a href="#user-userexists">user_exists()</a></li>
 									<li><a href="#user-get">get()</a></li>
 									<li><a href="#user-changepassword">change_password()</a></li>
 									<li><a href="#user-groups">groups()</a></li>
@@ -107,6 +105,7 @@
 								</ul>
 							</li>
 						</ul>
+
 						<div id="influads_block" class="influads_block"> </div>
 					</nav>
 					&nbsp;
@@ -753,19 +752,18 @@ catch (SentryUserException $e)
 						<blockquote class="notes"><strong>Notes:</strong> The register method checks to make sure the login and emails are unique.  Register is
 						typically used for the user registration process unless you do not want activation.</blockquote>
 						<h5>Examples:</h5>
-						<pre><code class="language-php">try
+<pre><code class="language-php">try
 {
 	// create the user
-	$user_id = Sentry::user()->register($vars);
+	$hash = Sentry::user()->register(array(
+		'email' => Input::post('email'), // 'john.doe@domain.com'
+		'password' => Input::post('password') // 'mypasssword'
+	));
 
-	if ($user_id)
+	if ($hash)
 	{
 		// the user was created
-
-		$user = Sentry::user($user_id);
-		$email = $user->get('email');
-		$activation_hash = $user->get('activation_hash');
-		$link = 'domain.com/auth/activate/'.base64_encode($email).'/'.$activation_hash;
+		$link = 'domain.com/auth/activate/'.$hash;
 
 		// send email with link to activate.
 	}
@@ -778,7 +776,7 @@ catch (SentryUserException $e)
 {
 	$errors = $e->getMessage(); // catch errors such as user exists or bad fields
 }
-						</code></pre>
+</code></pre>
 
 						<h4 id="user-update" class="method">update(array $fields, $hash_password = true)</h4>
 						<p>
