@@ -34,21 +34,78 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 </head>
-<body>
+<body id="top">
 
 <div class="container">
 				<div class="three columns sidebar">
 					<nav>
-						<h3 id="logo">Sentry</h3>
-						<ul>
+						<a href="#top"><img class="brand" src="images/brand-sentry.png" alt="sentry" /></a>
+
+
+						<ul id="menu">
 							<li><a href="#features">Features</a></li>
 							<li><a href="#download">Download</a></li>
 							<li><a href="#installation">Installation</a></li>
-							<li><a href="#configuration">Configuration</a></li>
-							<li><a href="#authentication">Authentication</a></li>
-							<li><a href="#users">Users</a></li>
-							<li><a href="#groups">Groups</a></li>
-							<li><a href="#attempts">Attempts / Suspend</a></li>
+							<li>
+								<a class="plus" href="#configuration">Configuration</a>
+								<ul class="sub">
+									<li><a class="active" href="#login">Login Column</a></li>
+									<li><a href="#remember">Remember Me</a></li>
+									<li><a href="#suspension">Suspension / Limit Attempts</a></li>
+								</ul>
+							</li>
+							<li>
+								<a class="plus" href="#authentication">Authentication</a>
+								<ul class="sub">
+									<li><a href="#user">user()</a></li>
+									<li><a href="#login-user">login()</a></li>
+									<li><a href="#logout">logout()</a></li>
+									<li><a href="#check">check()</a></li>
+									<li><a href="#activate_user">activate_user()</a></li>
+									<li><a href="#reset_password">reset_password()</a></li>
+									<li><a href="#reset_password_confirm">reset_password_confirm()</a></li>
+								</ul>
+							</li>
+							<li>
+								<a class="plus" href="#users">Users</a>
+								<ul class="sub">
+									<li><a href="#user-create">create()</a></li>
+									<li><a href="#user-register">register()</a></li>
+									<li><a href="#user-update">update()</a></li>
+									<li><a href="#user-delete">delete()</a></li>
+									<li><a href="#user-userexists">userexists()</a></li>
+									<li><a href="#user-get">get()</a></li>
+									<li><a href="#user-changepassword">change_password()</a></li>
+									<li><a href="#user-groups">groups()</a></li>
+									<li><a href="#user-groupexists">group_exists()</a></li>
+									<li><a href="#user-addtogroup">add_to_group()</a></li>
+									<li><a href="#user-removefromgroup">remove_from_group()</a></li>
+									<li><a href="#user-ingroup">in_group()</a></li>
+									<li><a href="#user-isadmin">is_admin()</a></li>
+									<li><a href="#user-haslevel">has_level()</a></li>
+									<li><a href="#user-atleastlevel">at_least_level()</a></li>
+								</ul>
+							</li>
+							<li>
+								<a class="plus" href="#groups">Groups</a>
+								<ul class="sub">
+									<li><a href="#group-group">group()</a></li>
+									<li><a href="#group-create">create()</a></li>
+									<li><a href="#group-users">users()</a></li>
+									<li><a href="#group-all">all()</a></li>
+								</ul>
+							</li>
+							<li>
+								<a class="plus" href="#attempts">Attempts / Suspend</a>
+								<ul class="sub">
+									<li><a href="#attempts-attempts">attempts()</a></li>
+									<li><a href="#attempts-getlimit">get_limit()</a></li>
+									<li><a href="#attempts-get">get()</a></li>
+									<li><a href="#attempts-add">add()</a></li>
+									<li><a href="#attempts-clear">clear()</a></li>
+									<li><a href="#attempts-suspend">suspend()</a></li>
+								</ul>
+							</li>
 						</ul>
 						<div id="influads_block" class="influads_block"> </div>
 					</nav>
@@ -106,14 +163,8 @@
 						<h3>Configuration</h3>
 						<p>Sentry has a few configuration options you may wish to adjust besides just the table names mentioned above.</p>
 
-						<ul class="navlist">
-						  <li><a class="active" href="#login">Login Column</a></li>
-						  <li><a href="#remember">Remember Me</a></li>
-						  <li><a href="#suspension">Suspension / Limit Attempts</a></li>
-						</ul>
+						<h4 id="login">Login Column</h4>
 
-
-					  	<h4 id="login">Login Column</h4>
 					  	<p>Sentry allows you to pick your login column to either be <strong>username</strong> or <strong>email</strong>. This option is easy to adjust in the configuration.</p>
 						<blockquote class="notes"><strong>Notes:</strong> Whichever option you pick, email will always be required. Both will always need to be unique.</blockquote>
 						<table class="config">
@@ -205,15 +256,7 @@
 					<div class="doc-section clearfix" id="authentication">
 						<h3>Authentication</h3>
 
-						<ul class="navlist">
-						  <li><a href="#user">user()</a></li>
-						  <li><a href="#login-user">login()</a></li>
-						  <li><a href="#logout">logout()</a></li>
-						  <li><a href="#check">check()</a></li>
-						  <li><a href="#activate_user">activate_user()</a></li>
-						  <li><a href="#reset_password">reset_password()</a></li>
-						  <li><a href="#reset_password_confirm">reset_password_confirm()</a></li>
-						</ul>
+
 
 						 <h4 id="user" class="method">user($id = null, $recache = false)</h4>
 						<p>The user method returns a Sentry_User object.</p>
@@ -603,23 +646,7 @@ catch (SentryAuthException $e)
 
 					<div class="doc-section clearfix" id="users">
 						<h3>Users</h3>
-						<ul class="navlist">
-						  <li><a href="#user-create">create()</a></li>
-						  <li><a href="#user-register">register()</a></li>
-						  <li><a href="#user-update">update()</a></li>
-						  <li><a href="#user-delete">delete()</a></li>
-						  <li><a href="#user-userexists">userexists()</a></li>
-						  <li><a href="#user-get">get()</a></li>
-						  <li><a href="#user-changepassword">change_password()</a></li>
-						  <li><a href="#user-groups">groups()</a></li>
-						  <li><a href="#user-groupexists">group_exists()</a></li>
-						  <li><a href="#user-addtogroup">add_to_group()</a></li>
-						  <li><a href="#user-removefromgroup">remove_from_group()</a></li>
-						  <li><a href="#user-ingroup">in_group()</a></li>
-						  <li><a href="#user-isadmin">is_admin()</a></li>
-						  <li><a href="#user-haslevel">has_level()</a></li>
-						  <li><a href="#user-atleastlevel">at_least_level()</a></li>
-						</ul>
+
 						<h4 id="user-create" class="method">create(array $user, $activation = false)</h4>
 						<p>
 						The create method creates a user
@@ -1360,13 +1387,7 @@ else
 
 					<div class="doc-section clearfix" id="groups">
 						<h3>Groups</h3>
-						<ul class="navlist">
-							<li><a href="#group-group">group()</a></li>
-							<li><a href="#group-create">create()</a></li>
-							<li><a href="#group-users">users()</a></li>
-							<li><a href="#group-all">all()</a></li>
-						</ul>
-						<!-- Just add .button to an anchor -->
+
 
 						<h4 id="group-group" class="method">group($id = null)</h4>
 						<p>
@@ -1565,15 +1586,7 @@ catch (SentryGroupException $e)
 
 					<div class="doc-section clearfix" id="attempts">
 						<h3>Attempts / Suspension</h3>
-						<ul class="navlist">
-							<li><a href="#attempts-attempts">attempts()</a></li>
-							<li><a href="#attempts-getlimit">get_limit()</a></li>
-							<li><a href="#attempts-get">get()</a></li>
-							<li><a href="#attempts-add">add()</a></li>
-							<li><a href="#attempts-clear">clear()</a></li>
-							<li><a href="#attempts-suspend">suspend()</a></li>
-						</ul>
-						<!-- Just add .button to an anchor -->
+
 
 						<h4 id="attempts-attempts" class="method">attempts($login_id = null, $ip_address = null)</h4>
 						<p>
@@ -1759,19 +1772,38 @@ catch (SentryAttemptsException $e)
 				</div><!-- content -->
 			</div><!-- container -->
 
-			<div class="resize"></div>
-
-
-
 
 
 
 		<!-- JS
 		================================================== -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<script src="javascripts/tabs.js"></script>
-		<script src="javascripts/highlight.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script src="js/tabs.js"></script>
+		<script src="js/highlight.js"></script>
 		<script>hljs.tabReplace = '    '; hljs.initHighlightingOnLoad();</script>
+		<script>
+
+			function initMenu() {
+				$('#menu ul').hide();
+				//$('#menu ul:first').show();
+				$('#menu li a').click(
+					function() {
+						var checkElement = $(this).next();
+						if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+							return false;
+						}
+						if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+							$('#menu ul:visible').slideUp('normal');
+							checkElement.slideDown('normal');
+							return false;
+						}
+					}
+				);
+			}
+
+			$(document).ready(function() {initMenu();});
+
+		</script>
 
 	</body>
 </html>

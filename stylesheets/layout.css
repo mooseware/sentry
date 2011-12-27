@@ -11,54 +11,48 @@
 /* Documentation Styles
 ================================================== */
 	div.container {
-		padding-top: 60px; }
-
+		padding-top: 20px; }
+	.brand {margin-left:20px;}
 	/* Doc nav */
 	nav {
 		position: fixed;
 		width: 160px; }
 
-	ul.navlist {margin-left:30px;}
-	.navlist li
-	{
-	list-style-type:upper-roman;
-	}
-
-	.navlist li:first-child {border-left:none;}
-
-	ul.navlist li a,
-	ul.navlist li a:visited,
-	ul.navlist li a:active  {
-		font-size: 14px;
-		color: #A59A00;
-		text-decoration: none;
-		font-weight: bold; }
-	ul.navlist li a:hover,
-	ul.navlist li a:focus {
-		color: #222; }
-
-	#logo {
-		margin-bottom: 20px;
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		letter-spacing: -1px;
-		font-weight: bold; }
 	nav ul {
-		float: left;  }
-	nav ul li {
-		display: block;
-		margin-bottom: 10px; }
+		margin:10px 0 0 0; }
+	nav ul li {}
 	nav ul li a,
 	nav ul li a:visited,
 	nav ul li a:active  {
-		font-size: 14px;
-		color: #555;
-		text-decoration: none;
-		font-weight: bold; }
+		display:block;
+		text-decoration:none;
+		font-weight:bold;
+		padding-left:24px;
+		padding-bottom:2px;
+	}
 	nav ul li a:hover,
 	nav ul li a:focus {
 		color: #222; }
+
+	.plus {
+		background: url(../images/menu.png) 0 -20px no-repeat;
+	}
+
+	.minus {
+		background: url(../images/menu.png) 0 0 no-repeat;
+	}
+
+	nav ul.sub {list-style-type:none; margin:10px 0 10px 10px; }
+	nav ul.sub li {}
+	nav ul.sub li a,
+	nav ul.sub li a:visited,
+	nav ul.sub li a:active  { color:#49182D; font-weight:normal; }
+	nav ul.sub li a:hover,
+	nav ul.sub li a:focus {
+		color: #222; }
+
 	header h1 {
-		font-size: 52px;
+		font-size: 48px;
 		line-height: 61px;
 		letter-spacing: -1px;
 		font-weight: normal;
@@ -70,6 +64,9 @@
 		margin: 50px 0; }
 	div.doc-section {
 		margin: 30px 0; }
+	.doc-section h3 {color:#49182D;}
+
+	.notes { background-color:#f7f7f7; color:#222222;}
 
 	#whatAndWhy .row {
 		padding: 30px 0 0; }
@@ -307,5 +304,3 @@ pre .tex .formula {
 	@media only screen and (max-width: 959px) and (max-device-width: 1000px) {
 		.resize { display: none; }
 	}
-
-
