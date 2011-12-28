@@ -12,12 +12,26 @@
 ================================================== */
 	div.container {
 		padding-top: 10px; }
-	.brand {margin-left:20px;position:fixed;}
-	.home {display:none;}
+	.brand {margin-left:20px;}
+	.home {
+		position:fixed;
+		bottom:0;
+		background:#49182D;
+		padding:20px 0;
+		width:inherit;
+		height:40px;
+		-webkit-border-radius: 8px 8px 0 0;
+		 border-radius: 8px 8px 0 0;
+		text-align:center; }
+
+	}
+
+
+
 	/* Doc nav */
 	nav {
 		position: static;
-		width: 160px; margin-top:148px;}
+		width: 160px;}
 
 	nav ul {
 		margin:10px 0 0 0; }
@@ -141,7 +155,11 @@
 	}
 	.method {border-bottom:2px solid #ccc;}
 
-	/*
+	a.white:link, a.white:visited, a.white:active  { color:#fff; text-decoration:none; font-weight:bold; font-size:18px;}
+
+    a.white:hover, a.white:focus  { text-decoration:underline; }
+
+/*
   IR_Black style (c) Vasily Mikhailitchenko <vaskas@programica.ru>
 */
 
