@@ -181,21 +181,6 @@
 							<td>Name of login column, either email or username.</td>
 						</tr>
 						</table>
-
-						<table class="config">
-						<tr>
-							<th>Option</th>
-							<th>Type</th>
-							<th>Default</th>
-							<th>Description</th>
-						</tr>
-						<tr>
-							<td>login_column</td>
-							<td>string</td>
-							<td>email</td>
-							<td>Name of login column, either email or username.</td>
-						</tr>
-						</table>
 						<hr />
 
 					  	<h4 id="remember">Remember Me</h4>
@@ -392,11 +377,8 @@ catch (SentryAuthException $e)
 							<pre><code class="language-php">// log the user out
 							Sentry::logout();
 							</code></pre>
-
-													  </li>
-													  <li id="check">
-
-													  	<h4 class="method">check()</h4>
+<hr />
+					  	<h4 id="check" class="method">check()</h4>
 							<p>
 							The check methods returns a bool of whether the user is logged in or not
 							</p>
@@ -425,7 +407,7 @@ if ( ! Sentry::check())
 
 </code></pre>
 <hr />
-							<h4 id="activate_user" class="method">activate_user($login_column_value, $code, $encoded = true)</h4>
+							<h4 id="activate_user" class="method">activate_user($login_column_value, $code, $decode = true)</h4>
 							<p>The activate_user method activates a non-active user</p>
 							<table>
 								<tr>
@@ -469,12 +451,12 @@ if ( ! Sentry::check())
 								</tr>
 							</table>
 							<h5>Examples:</h5>
-<pre><code class="language-php">// try to log a user in
+<pre><code class="language-php">// try to activate a user account
 try
 {
-	// log the user in
+	// activate the user using encoded input
 	$activate_user = Sentry::activate_user('VGhpcyBpcyBhbiBlbmNvZGVkIHN0cmluZw==', '93kavFY63S8jtala93a76fQ...');
-	// or
+	// .. or using plain input
 	$activate_user = Sentry::activate_user('john.doe@domain.com', '93kavFY63S8jtala93a76fQ...', false);
 
 	if ($activate_user)
@@ -560,7 +542,7 @@ catch (SentryAuthException $e)
 }
 catch (SentryAuthException $e)
 {
-	// issue activating the user
+	// issue resetting the user's password
 	// store/set and display caught exceptions such as a user not existing or user is disabled
 	$errors = $e->getMessage();
 }
@@ -618,9 +600,9 @@ catch (SentryAuthException $e)
 							<h5>Examples:</h5>
 <pre><code class="language-php">try
 {
-	// confirm password reset
+	// confirm password reset using encoded input
 	$confirm_reset = Sentry::reset_password_confirm('VGhpcyBpcyBhbiBlbmNvZGVkIHN0cmluZw==', '93kavFY63S8jtala93a76fQ...');
-	// or
+	// .. or plain input
 	$confirm_reset = Sentry::reset_password_confirm('john.doe@domain.com', '93kavFY63S8jtala93a76fQ...', true);
 
 	if ($confirm_reset)
@@ -635,7 +617,7 @@ catch (SentryAuthException $e)
 }
 catch (SentryAuthException $e)
 {
-	// issue activating the user
+	// issue confirming password reset of the user
 	// store/set and display caught exceptions such as a user not existing or user is disabled
 	$errors = $e->getMessage();
 }
@@ -1288,14 +1270,14 @@ else
 						<br />
 						<h5>Examples:</h5>
 						<pre><code class="language-php">// check to see if the current user is an admin
-						if (Sentry::user()->is_admin())
-						{
-							// user is an admin
-						}
-						else
-						{
-							// user is not an admin
-						}
+if (Sentry::user()->is_admin())
+{
+	// user is an admin
+}
+else
+{
+	// user is not an admin
+}
 						</code></pre>
 
 						<h4 id="user-haslevel" class="method">has_level($level)</h4>
@@ -1455,9 +1437,9 @@ catch (SentryGroupException $e)
 										</tr>
 										<tr>
 											<td><kbd>$group</kbd></td>
-											<td>string</td>
+											<td>array</td>
 											<td></td>
-											<td>The group name.</td>
+											<td>The new group information.</td>
 										</tr>
 									</table>
 								</td>
@@ -1476,7 +1458,7 @@ catch (SentryGroupException $e)
 						<pre><code class="language-php">// create a group
 try
 {
-	Sentry::group()->create('mynewgroup');
+	Sentry::group()->create(array('name' => 'mynewgroup', 'level' => 10));
 }
 catch (SentryGroupException $e)
 {
