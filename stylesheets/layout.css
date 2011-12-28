@@ -19,7 +19,7 @@
 		background:#49182D;
 		padding:20px 0;
 		width:inherit;
-		height:40px;
+		height:20px;
 		-webkit-border-radius: 8px 8px 0 0;
 		 border-radius: 8px 8px 0 0;
 		text-align:center; }
@@ -275,6 +275,7 @@ pre .tex .formula {
 		#examples .four.columns {
 			padding-top: 30px;
 		}
+		.home{display:none;}
 	}
 
 	/* Mobile Landscape */
@@ -282,6 +283,7 @@ pre .tex .formula {
 		nav ul {
 			display: none;
 		}
+		.home {display:none;}
 	}
 
 	/* Non 960 */
@@ -296,6 +298,7 @@ pre .tex .formula {
 			width: 124px; }
 			.brand {
 		display:none; }
+			.home {display:none;}
 	}
 	}
 
@@ -306,6 +309,7 @@ pre .tex .formula {
 	@media only screen and (min-width: 480px) and (max-width: 767px) {
 		.brand {
 		display:none; }
+		.home {display:none;}
 	}
 	}
 
