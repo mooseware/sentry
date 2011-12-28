@@ -50,11 +50,11 @@
 		color: #222; }
 
 	.plus {
-		background: url(../images/menu.png) 0 -20px no-repeat;
+		background: url(../img/menu.png) 0 -20px no-repeat;
 	}
 
 	.minus {
-		background: url(../images/menu.png) 0 0 no-repeat;
+		background: url(../img/menu.png) 0 0 no-repeat;
 	}
 
 	nav ul.sub {list-style-type:none; margin:10px 0 10px 10px; }
