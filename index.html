@@ -639,6 +639,10 @@ catch (SentryAuthException $e)
 			<pre><code class="language-php">try
 {
 	// create the user - no activation required
+	$vars = array(
+    	'email'    => 'john.doe@domain.com',
+    	'password' => 'mypass'
+	);
 	$user_id = Sentry::user()->create($vars, false);
 
 	if ($user_id)
