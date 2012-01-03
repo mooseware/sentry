@@ -625,7 +625,7 @@ catch (SentryAuthException $e)
 				</tr>
 				<tr>
 					<th>Returns</th>
-					<td>Integer - the users id</td>
+					<td>Integer|Array - user_id, or an array of user_id and activation hash.</td>
 				</tr>
 				<tr>
 					<th>Throws</th>
@@ -682,7 +682,7 @@ catch (SentryUserException $e)
 				</tr>
 				<tr>
 					<th>Returns</th>
-					<td>Integer - the users id</td>
+					<td>Integer|Array - user_id, or an array of user_id and activation hash.</td>
 				</tr>
 				<tr>
 					<th>Throws</th>
@@ -695,27 +695,27 @@ catch (SentryUserException $e)
 			<h5>Examples:</h5>
 			<pre><code class="language-php">try
 {
-	// create the user
-	$hash = Sentry::user()->register(array(
-		'email' => Input::post('email'), // 'john.doe@domain.com'
-		'password' => Input::post('password') // 'mypasssword'
-	));
+    // create the user
+    $user = Sentry::user()->register(array(
+        'email' => 'john.doe@domain.com',
+        'password' => 'mypasssword'
+    ));
 
-	if ($hash)
-	{
-		// the user was created
-		$link = 'domain.com/auth/activate/'.$hash;
+    if ($user)
+    {
+        // the user was created
+        $link = 'domain.com/auth/activate/'.$user['hash'];
 
-		// send email with link to activate.
-	}
-	else
-	{
-		// something went wrong - shouldn't really happen
-	}
+        // send email with link to activate.
+    }
+    else
+    {
+        // something went wrong - shouldn't really happen
+    }
 }
 catch (SentryUserException $e)
 {
-	$errors = $e->getMessage(); // catch errors such as user exists or bad fields
+    $errors = $e->getMessage(); // catch errors such as user exists or bad fields
 }
 </code></pre>
 			<h4 id="user-update" class="method">update(array $fields, $hash_password = true)</h4>
