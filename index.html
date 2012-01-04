@@ -802,7 +802,7 @@ catch (SentryUserException $e)
 {
 	// update the user
 	$user = Sentry::user(25);
-	$delete = $user->delete());
+	$delete = $user->delete();
 
 	if ($delete)
 	{
@@ -1110,7 +1110,7 @@ catch (SentryUserException $e)
 	$user->remove_from_group(2);
 
 	// option 2
-	$user->remove_fro_group('editor');
+	$user->remove_from_group('editor');
 }
 catch (SentryUserException $e)
 {
